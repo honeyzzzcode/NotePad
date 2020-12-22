@@ -15,6 +15,10 @@ public class Reminder extends Alarm{
         var str = super.toString();
         return String.format("%s Date : %s",str, date);
     }
-
+    @Override
+    public void askData() {
+        super.askData();
+        date = InputUtils.askString("date");
+    }
 
 }

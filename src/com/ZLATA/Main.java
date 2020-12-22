@@ -1,5 +1,7 @@
 package com.ZLATA;
 
+import enumDemo.TrafficLight;
+
 public class Main {
     private static Notepad notepad = new Notepad();
 
@@ -8,7 +10,7 @@ public class Main {
 
         boolean running = true;
         while (running) {
-            var cmd = InputUtils.askString("Enter command: \n Possible commands : \n 1. create\n 2. list\n 3. help\n 4. exit");
+            var cmd = InputUtils.askString("Enter command: \n");
             switch (cmd) {
                 case "list":
                     listRecords();
@@ -35,30 +37,16 @@ public class Main {
     }
 
     private static void createRecord() {
-        var type = InputUtils.askString("Type");
-        switch (type) {
-            case "person":
-                notepad.createPerson();
-                break;
-            case "book":
-                notepad.createBook();
-                break;
-            case "stick":
-                notepad.createStick();
-                break;
-            case "alarm":
-                notepad.createAlarm();
-                break;
-            case "reminder":
-                notepad.createReminder();
-                break;
-            default:
-                System.out.println("uknown type");
-
-        }
+        var strtype = InputUtils.askString("Type");
+        var type = RecordType.valueOf(strtype);
+        notepad.createRecord(type);
     }
 
     private static void showHelp() {
-        System.out.println("This is very helpful");
+        System.out.print("Possible commands : create \n list \nhelp \nexit\n Possible types:  ");
+        for (RecordType l : RecordType.values()) {
+
+            System.out.println(l);
+        }
     }
 }

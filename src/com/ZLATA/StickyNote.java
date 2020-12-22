@@ -1,6 +1,6 @@
 package com.ZLATA;
 
-public class Sticker extends Record {
+public class StickyNote extends Record {
     private String text;
 
     public String getText() {
@@ -14,5 +14,10 @@ public class Sticker extends Record {
     public String toString() {
         var str = super.toString();
         return String.format("%s Text: %s", str, text);
+    }
+
+    @Override
+    public void askData() {
+        text = InputUtils.askString("text");
     }
 }

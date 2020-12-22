@@ -19,4 +19,7 @@ public abstract class Record {
 
         return String.format("id: %d;", id);
     }
+
+    public abstract void askData();
+
 }

@@ -45,4 +45,12 @@ public class Person extends Record {
         var str = super.toString();
         return String.format("%s first name: %s ; last name %s phone %s email %s",str, firstName, lastName, phone, email);
     }
+
+    @Override
+    public void askData() {
+        firstName = InputUtils.askString("First name");
+        lastName = InputUtils.askString("Last name");
+        phone = InputUtils.askString("phone");
+        email = InputUtils.askString("email");
+    }
 }
