@@ -23,35 +23,28 @@ public class Pet extends Record {
     }
 
 
-
     @Override
     public void askData() {
+
         name = InputUtils.askString("Write name");
-
-        for (Species l : Species.values()) {
-            System.out.println(l);
+        while (true) {
+            for (Species l : Species.values()) {
+                System.out.println(l);
+            }
+            try {
+                var strSpecies = InputUtils.askString("Choose specie:");
+                species = Species.valueOf(strSpecies);
+                return;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Mistake.Such specie doesnt exist ");
+            }
         }
-       try {
-           var specie = InputUtils.askString("Choose specie:");
-           var type = Species.valueOf(specie);
-           if (type != specie){
-               System.err.println("DOG \n FISH \n CAT");
-               continue;
-           }
-       }catch (
-    InputMismatchException e) {
-        String input = InputUtils.askString("");
-        System.out.println(input + " is not specie");
-        System.err.println("this is not one of species");
-    }
-
-
     }
 
     @Override
     public String toString() {
         var str = super.toString();
-        return String.format("%s  name: %s  Specie: ", str, name , ?);
+        return String.format("%s  name: %s  Specie: %s ", str, name, species);
 
     }
 
