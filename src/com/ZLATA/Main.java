@@ -24,6 +24,12 @@ public class Main {
                 case "exit":
                     running = false;
                     break;
+                case "delete":
+                    deleteRecord();
+                    break;
+                case "find":
+                    findRecord();
+                    break;
 
                 default:
                     System.out.println("Uknown command");
@@ -32,14 +38,33 @@ public class Main {
         System.out.println("Bye Bye");
     }
 
+    private static void findRecord() {
+        var substr = InputUtils.askString("S to find");
+        notepad.find(substr);
+    }
+
+    private static void deleteRecord() {
+        int id = InputUtils.askInt("ID");
+        notepad.delete(id);
+
+    }
+
     private static void listRecords() {
         notepad.listRecords();
     }
 
     private static void createRecord() {
-        var strtype = InputUtils.askString("Type");
-        var type = RecordType.valueOf(strtype);
-        notepad.createRecord(type);
+        while (true) {
+            try {
+                var strtype = InputUtils.askString("Type");
+                var type = RecordType.valueOf(strtype);
+                notepad.createRecord(type);
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Mistake.Such specie doesnt exist");
+
+            }
+        }
     }
 
     private static void showHelp() {

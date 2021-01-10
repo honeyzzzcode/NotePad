@@ -48,5 +48,12 @@ public class Pet extends Record {
 
     }
 
+    @Override
+    public boolean contains(String substr) {
+        var strSpecies = String.valueOf(species);
+        return super.contains(substr)
+                || strSpecies.toLowerCase().contains(substr)
+                || name.toLowerCase().contains(substr);
+    }
 }
 

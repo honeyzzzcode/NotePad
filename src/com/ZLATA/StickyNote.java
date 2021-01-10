@@ -20,4 +20,12 @@ public class StickyNote extends Record {
     public void askData() {
         text = InputUtils.askString("text");
     }
+    @Override
+    public boolean contains(String substr) {
+        return super.contains(substr)
+                || text.toLowerCase().contains(substr)
+
+                ;
+    }
 }
+

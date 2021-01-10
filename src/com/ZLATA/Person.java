@@ -1,12 +1,21 @@
 package com.ZLATA;
 
+import java.time.LocalDate;
+
 public class Person extends Record {
 
     private String firstName;
     private String lastName;
     private String phone;
     private String email;
+    private LocalDate birthday;
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
 
     public String getLastName() {
         return lastName;
@@ -43,7 +52,7 @@ public class Person extends Record {
     @Override
     public String toString() {
         var str = super.toString();
-        return String.format("%s first name: %s ; last name %s phone %s email %s",str, firstName, lastName, phone, email);
+        return String.format("%s first name: %s ; last name %s phone %s email %s BD %s",str, firstName, lastName, phone, email,InputUtils.dateToString(birthday));
     }
 
     @Override
@@ -52,5 +61,17 @@ public class Person extends Record {
         lastName = InputUtils.askString("Last name");
         phone = InputUtils.askString("phone");
         email = InputUtils.askString("email");
+        birthday = InputUtils.askDate("Birthday");
+    }
+
+    @Override
+    public boolean contains(String substr) {
+        return super.contains(substr)
+                || firstName.toLowerCase().contains(substr)
+                || lastName.toLowerCase().contains(substr)
+                || phone.toLowerCase().contains(substr)
+                || email.toLowerCase().contains(substr)
+                || InputUtils.dateToString(birthday).toLowerCase().contains(substr)
+                ;
     }
 }

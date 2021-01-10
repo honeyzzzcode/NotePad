@@ -40,5 +40,14 @@ public class Book extends Record{
         author = InputUtils.askString("author");
         isbn = InputUtils.askString("isbn");
     }
+    @Override
+    public boolean contains(String substr) {
+        return super.contains(substr)
+                || title.toLowerCase().contains(substr)
+                || author.toLowerCase().contains(substr)
+                || isbn.toLowerCase().contains(substr)
+                ;
+    }
+
 
 }

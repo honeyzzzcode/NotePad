@@ -22,4 +22,9 @@ public abstract class Record {
 
     public abstract void askData();
 
+    public boolean contains(String substr) {
+        var strID = String.valueOf(id);
+        return strID.contains(substr);
+    }
+
 }
