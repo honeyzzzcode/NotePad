@@ -30,12 +30,27 @@ public class Main {
                 case "find":
                     findRecord();
                     break;
+                case "due":
+                    listDue();
+                    break;
+                case "dismiss":
+                    dismiss();
+
 
                 default:
                     System.out.println("Uknown command");
             }
         }
         System.out.println("Bye Bye");
+    }
+
+    private static void dismiss() {
+        int id = InputUtils.askInt("ID");
+        notepad.dismiss(id);
+    }
+
+    private static void listDue() {
+        notepad.listDue();
     }
 
     private static void findRecord() {

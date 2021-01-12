@@ -1,8 +1,12 @@
 package com.ZLATA;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public class Reminder extends Alarm {
+public class Reminder extends Alarm implements Scheduled {
+    private LocalDate date;
+    private boolean active = true;
+
     public LocalDate getDate() {
         return date;
     }
@@ -11,9 +15,17 @@ public class Reminder extends Alarm {
         this.date = date;
     }
 
-    private LocalDate date;
 
+    @Override
+    public boolean isDue() {
+        var tmp = LocalDateTime.of(getDate(), getTime());
+        return active && LocalDateTime.now().isAfter(tmp);
+    }
 
+    @Override
+    public void dismiss() {
+        active = false;
+    }
 
     @Override
     public String toString() {
@@ -33,5 +45,6 @@ public class Reminder extends Alarm {
                 || InputUtils.dateToString(date).toLowerCase().contains(substr)
                 ;
     }
-
 }
+
+

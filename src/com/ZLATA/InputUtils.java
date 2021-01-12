@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public class InputUtils {
-    public static final  String timeformat = "HH-mm";
-    public static final DateTimeFormatter timeform = DateTimeFormatter.ofPattern(timeformat);
+    public static final  String TIME_FORMATTER = "HH-mm";
+    public static final DateTimeFormatter TIME_FORM = DateTimeFormatter.ofPattern(TIME_FORMATTER);
 
-    public static final  String dateformat = "dd.MM.yyyy";
-    public static final DateTimeFormatter dateform = DateTimeFormatter.ofPattern(dateformat);
+    public static final  String DATE_FORMATTER = "dd.MM.yyyy";
+    public static final DateTimeFormatter DATE_FORM = DateTimeFormatter.ofPattern(DATE_FORMATTER);
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -28,24 +28,24 @@ public class InputUtils {
     }
 
     public static LocalTime askTime(String message) {
-        System.out.println(message + "  " + timeformat );
+        System.out.println(message + "  " + TIME_FORMATTER );
         var strTime = scanner.next();
-        return  LocalTime.parse(strTime, timeform);
+        return  LocalTime.parse(strTime, TIME_FORM);
 
     }
     public static String timeToString(LocalTime time){
-        return timeform.format(time);
+        return TIME_FORM.format(time);
 
     }
     public static String dateToString(LocalDate date){
-        return dateform.format(date);
+        return DATE_FORM.format(date);
 
     }
 
     public static LocalDate askDate(String message) {
-        System.out.println(message +"   "+  dateformat );
+        System.out.println(message +"   "+  DATE_FORMATTER );
         var strDate = scanner.next();
-        return  LocalDate.parse(strDate, dateform);
+        return  LocalDate.parse(strDate, DATE_FORM);
 
     }
 }

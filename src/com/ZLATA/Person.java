@@ -1,22 +1,17 @@
 package com.ZLATA;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
-public class Person extends Record {
+public class Person extends Record implements Scheduled {
+
+    private LocalDate dismissDate;
 
     private String firstName;
     private String lastName;
     private String phone;
     private String email;
     private LocalDate birthday;
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
     public String getLastName() {
         return lastName;
     }
@@ -49,10 +44,30 @@ public class Person extends Record {
         this.phone = phone;
     }
 
+    public LocalDate getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    @Override
+    public boolean isDue() {
+        var tmp = LocalDate.of(getBirthday());
+        return  LocalDate.now().plusMonths(1).isAfter(tmp);
+    }
+
+    @Override
+    public void dismiss() {
+
+        dismissDate = LocalDate.now().plusYears(1);
+    }
+
     @Override
     public String toString() {
         var str = super.toString();
-        return String.format("%s first name: %s ; last name %s phone %s email %s BD %s",str, firstName, lastName, phone, email,InputUtils.dateToString(birthday));
+        return String.format("%s first name: %s ; last name %s phone %s email %s BD %s", str, firstName, lastName, phone, email, InputUtils.dateToString(birthday));
     }
 
     @Override

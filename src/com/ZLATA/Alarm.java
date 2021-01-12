@@ -1,9 +1,11 @@
 package com.ZLATA;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Alarm extends StickyNote {
+public class Alarm extends StickyNote implements Scheduled {
     private LocalTime time;
+    private LocalDate dismissDate;
     public LocalTime getTime() {
         return time;
     }
@@ -13,8 +15,14 @@ public class Alarm extends StickyNote {
     }
 
 
+public boolean isDue(){
+        return !LocalDate.now().equals(dismissDate) && LocalTime.now().isAfter(time);
+}
 
-
+    @Override
+    public void dismiss() {
+dismissDate = LocalDate.now();
+    }
 
     @Override
     public String toString() {
@@ -32,5 +40,6 @@ public class Alarm extends StickyNote {
                 || InputUtils.timeToString(time).toLowerCase().contains(substr)
                 ;
     }
+
 }
 

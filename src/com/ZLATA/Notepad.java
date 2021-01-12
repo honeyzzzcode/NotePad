@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class Notepad {
     private ArrayList<Record> records = new ArrayList<>();
+
     public void listRecords() {
         for (Record rec : records) {
             System.out.println(rec);
         }
     }
+
     public void createRecord(RecordType recType) {
         var rec = recType.createRecord();
         rec.askData();
@@ -17,7 +19,7 @@ public class Notepad {
     }
 
     public void delete(int id) {
-var t = System.nanoTime();
+        var t = System.nanoTime();
 //        for (int i = 0; i < records.size(); i++) {
 //            var rec = records.get(i);
 //            if (rec.getId() == id){
@@ -31,7 +33,7 @@ var t = System.nanoTime();
     }
 
     public void find(String substr) {
-var tmp = substr.toLowerCase();
+        var tmp = substr.toLowerCase();
 //option1
 //        for (int i = 0; i < records.size(); i++) {
 //           var rec = records.get(i);
@@ -49,6 +51,26 @@ var tmp = substr.toLowerCase();
 
         records.stream()
                 .filter(rec -> rec.contains(tmp))
-                .forEach(rec -> System.out.println(rec) );
+                .forEach(rec -> System.out.println(rec));
     }
-}
+
+    public void listDue() {
+        for (Record rec : records) {
+            if (rec instanceof Scheduled) {
+                Scheduled sc = (Scheduled) rec;
+                if (sc.isDue()) {
+                    System.out.println(rec);
+                }
+            }
+        }
+    }
+
+    public void dismiss(int id) {
+        for (Record rec : records) {
+if (rec instanceof Scheduled){
+            var sch = (Scheduled) rec;
+            if (rec.getId() == id){
+               sch.dismiss();
+               break;
+    }
+}}}}
