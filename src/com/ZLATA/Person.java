@@ -54,8 +54,7 @@ public class Person extends Record implements Scheduled {
 
     @Override
     public boolean isDue() {
-        var tmp = LocalDate.of(getBirthday());
-        return  LocalDate.now().plusMonths(1).isAfter(tmp);
+        return !LocalDate.now().plusYears(1).equals(dismissDate) && LocalDate.now().plusMonths(1).isAfter(birthday);
     }
 
     @Override
